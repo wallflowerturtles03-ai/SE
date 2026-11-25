@@ -83,10 +83,10 @@ for _, row in wbt_df.iterrows():
 st.markdown("""
 <style>
     :root {
-        --background: #000000;
+        --background: #FBF3E6 ;
         --surface: #1f1f1f;
         --surface-hover: #292929;
-        --text: #ffffff;
+        --text: #000000;
         --muted: #b4b4b4;
         --border: #343434;
         --accent: #7acb91;
@@ -338,7 +338,7 @@ with chart_col:
     bar.update_layout(
         height=290,
         margin={"l": 5, "r": 5, "t": 15, "b": 5},
-        paper_bgcolor="black",
+        paper_bgcolor="white",
         plot_bgcolor="white",
         showlegend=False,
         yaxis={"title": "°C" if key != "humidity" else "%", "gridcolor": "#edf0ea"},
