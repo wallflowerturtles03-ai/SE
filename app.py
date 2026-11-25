@@ -107,7 +107,7 @@ st.write("")
 map_col, detail_col = st.columns([1.55, 1], gap="medium")
 with map_col:
     st.markdown('<div class="panel-title">Quadrant field map</div><div class="panel-sub">Hover over a shape or marker for a quick summary. Select a quadrant to view details.</div>', unsafe_allow_html=True)
-    metric_label = st.selectbox("Color polygons by", ["WBT", "Air temperature", "Tree count"], horizontal=True, label_visibility="collapsed")
+    metric_label = st.selectbox("Color polygons by", ["WBT", "Air temperature", "Tree count"] )
     metric_key = {"WBT":"wbt", "Air temperature":"temperature", "Tree count":"tree_count"}[metric_label]
     values = {q: rows[q][metric_key] if metric_key != "tree_count" else tree_info[q]["tree_count"] for q in rows}
     low, high = min(values.values()), max(values.values())
