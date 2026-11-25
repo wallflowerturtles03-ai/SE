@@ -183,7 +183,7 @@ with map_col:
     key = {"WBT": "wbt", "Air temperature": "temperature", "Humidity": "humidity"}[chart_metric]
     bar = go.Figure(go.Bar(
         x=[f"Q{q}" for q in rows], y=[rows[q][key] for q in rows],
-        marker_color=["#285b43" if q == selected_q else "#83a98a" for q in rows],
+        marker_color="#285b43",
         text=[f"{rows[q][key]:g}" for q in rows], textposition="outside",
     ))
     bar.update_layout(
