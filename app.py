@@ -82,22 +82,105 @@ for _, row in wbt_df.iterrows():
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
-.block-container { max-width: 1500px; padding-top: 1.2rem; padding-bottom: 2rem; }
-.hero { padding: .5rem 0 1.1rem; }
-.eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: #718078; font-weight: 700; }
-.hero h1 { font-family: Manrope, sans-serif; font-size: 2.25rem; letter-spacing: -.05em; margin: .4rem 0; }
-.hero p { color: #758078; margin: 0; }
-.kpi { background: white; border: 1px solid #e6e9e2; border-radius: 15px; padding: 17px 18px; min-height: 105px; }
-.kpi-label { font-size: .8rem; color: #758078; }
-.kpi-value { font: 800 1.55rem Manrope, sans-serif; margin: .35rem 0; }
-.kpi-foot { font-size: .72rem; color: #8a948c; }
-.panel-title { font: 700 1rem Manrope, sans-serif; margin: 0; }
-.panel-sub { font-size: .76rem; color: #758078; margin: .25rem 0 .75rem; }
-[data-testid="stMetricValue"] { font-family: Manrope, sans-serif; }
+    :root {
+        --background: #000000;
+        --surface: #1f1f1f;
+        --surface-hover: #292929;
+        --text: #ffffff;
+        --muted: #b4b4b4;
+        --border: #343434;
+        --accent: #7acb91;
+    }
+
+    html, body,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stHeader"],
+    [data-testid="stToolbar"] {
+        background: var(--background) !important;
+        color: var(--text) !important;
+    }
+
+    [data-testid="stSidebar"] {
+        background: #111111 !important;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    p, label, span, [class*="stMarkdown"] {
+        color: var(--text) !important;
+    }
+
+    .kpi,
+    [data-testid="stMetric"],
+    [data-testid="stDataFrame"],
+    [data-testid="stPlot"] {
+        background: var(--surface) !important;
+        color: var(--text) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 14px;
+    }
+
+    [data-testid="stMetric"] {
+        padding: 14px;
+    }
+
+    [data-testid="stMetricValue"],
+    [data-testid="stMetricLabel"],
+    [data-testid="stMetricDelta"] {
+        color: var(--text) !important;
+    }
+
+    .hero p,
+    .panel-sub,
+    .kpi-foot,
+    .kpi-label,
+    small,
+    caption {
+        color: var(--muted) !important;
+    }
+
+    [data-baseweb="select"] > div,
+    [data-baseweb="input"] > div,
+    [data-testid="stTextInput"] input {
+        background: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+    div[data-testid="stDataFrame"] table {
+        background: var(--surface) !important;
+        color: var(--text) !important;
+    }
+
+    div[data-testid="stDataFrame"] th,
+    div[data-testid="stDataFrame"] td {
+        background: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+    button {
+        background: var(--surface) !important;
+        color: var(--text) !important;
+        border: 1px solid var(--border) !important;
+    }
+
+    button:hover {
+        background: var(--surface-hover) !important;
+    }
+
+    .stApp {
+        background: var(--background) !important;
+    }
+
+    .js-plotly-plot,
+    .folium-map {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+    }
 </style>
 """, unsafe_allow_html=True)
+
 
 st.markdown('<div class="hero"><div class="eyebrow">Biodiversity & microclimate survey</div><h1>A closer look at the forest.</h1><p>Explore field observations across six survey quadrants at Karnala Wildlife Sanctuary.</p></div>', unsafe_allow_html=True)
 
