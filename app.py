@@ -255,8 +255,8 @@ with chart_col:
     bar.update_layout(
         height=290,
         margin={"l": 5, "r": 5, "t": 15, "b": 5},
-        paper_bgcolor="white",
-        plot_bgcolor="white",
+        paper_bgcolor="black",
+        plot_bgcolor="black",
         showlegend=False,
         yaxis={"title": "°C" if key != "humidity" else "%", "gridcolor": "#edf0ea"},
         xaxis={"title": ""},
