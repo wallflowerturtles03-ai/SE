@@ -83,7 +83,7 @@ for _, row in wbt_df.iterrows():
 st.markdown("""
 <style>
     :root {
-        --background: #FBF3E6 ;
+        --background: #D8D4D1 ;
         --surface: #FBF3E6;
         --surface-hover: #292929;
         --text: #000000;
