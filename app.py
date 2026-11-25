@@ -256,7 +256,7 @@ with chart_col:
         height=290,
         margin={"l": 5, "r": 5, "t": 15, "b": 5},
         paper_bgcolor="black",
-        plot_bgcolor="black",
+        plot_bgcolor="white",
         showlegend=False,
         yaxis={"title": "°C" if key != "humidity" else "%", "gridcolor": "#edf0ea"},
         xaxis={"title": ""},
