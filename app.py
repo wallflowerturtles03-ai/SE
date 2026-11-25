@@ -98,38 +98,25 @@ h1, h2, h3, h4, h5, h6, p, label { color: var(--text) !important; }
 .hero h1 { font-family: Manrope, sans-serif; font-size: 2.25rem; letter-spacing: -.05em; margin: .4rem 0; }
 .hero p { color: var(--muted) !important; margin: 0; }
 .kpi {
-    box-sizing: border-box;
-    min-height: 132px;
-    height: 100%;
-    padding: 18px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 7px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    box-sizing: border-box; min-height: 132px; height: 100%; padding: 18px 20px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; gap: 7px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px;
 }
 .kpi-label { color: var(--muted); font-size: .82rem; font-weight: 600; }
 .kpi-value { color: var(--text); font: 800 1.8rem Manrope, sans-serif; line-height: 1.2; }
 .kpi-foot { color: var(--muted); font-size: .74rem; line-height: 1.35; }
 .panel-title { font: 700 1rem Manrope, sans-serif; margin: 0; }
 .panel-sub { font-size: .76rem; color: var(--muted); margin: .25rem 0 .75rem; }
-[data-testid="stMetric"] {
-    background: var(--surface) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 14px;
-    padding: 14px;
-}
+
+[data-testid="stMetric"]
+{ background: var(--surface) !important; border: 1px solid var(--border) 
+!important; border-radius: 14px; padding: 14px; }
+
 [data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color: var(--text) !important; }
 [data-testid="stMetricDelta"] { color: var(--muted) !important; }
-[data-baseweb="select"] > div, [data-baseweb="input"] > div {
-    background: var(--surface) !important;
-    color: var(--text) !important;
-    border-color: var(--border) !important;
-}
+[data-baseweb="select"] > div, [data-baseweb="input"] > div { background: var(--surface) !important; color: var(--text)
+!important; border-color: var(--border) !important; }
 .js-plotly-plot, .folium-map { border-radius: 14px; overflow: hidden; }
 @media (max-width: 800px) {
     .block-container { padding: 1rem 1rem 2rem; }
@@ -155,12 +142,7 @@ for col, label, value, foot in [
 st.write("")
 map_col, detail_col = st.columns([1.55, 1], gap="medium")
 with map_col:
-    st.markdown('<div class="panel-title">Quadrant field map</div><div class="panel-sub">Select a quadrant below or inspect the satellite map.</div>', unsafe_allow_html=True)
-    metric_label = st.selectbox("Color polygons by", ["WBT", "Air temperature", "Tree count"])
-    metric_key = {"WBT": "wbt", "Air temperature": "temperature", "Tree count": "tree_count"}[metric_label]
-    values = {q: rows[q][metric_key] if metric_key != "tree_count" else tree_info[q]["tree_count"] for q in rows}
-    low, high = min(values.values()), max(values.values())
-
+    st.markdown('<div class="panel-title">Quadrant field map</div><div class="panel-sub"> inspect the satellite map and survey boudaries.</div>', unsafe_allow_html=True)
     field_map = folium.Map(location=[18.8925, 73.1150], zoom_start=15, tiles=None, control_scale=True)
     folium.TileLayer(
         tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -173,15 +155,12 @@ with map_col:
     ).add_to(field_map)
 
     for q in range(1, 7):
-        value = values[q]
-        t = 0 if high == low else (value - low) / (high - low)
-        hue = int(145 - 120 * t)
-        fill = f"hsl({hue}, 38%, {82 - 16 * t:.0f}%)"
+        
         if q in POLYGONS:
             locations = [(lat, lon) for lon, lat in POLYGONS[q]]
             folium.Polygon(
-                locations=locations, color="#54805f", weight=2, fill=True,
-                fill_color=fill, fill_opacity=0.55,
+                locations=locations, color="#52748", weight=2, fill=True,
+                fill_color="#b8cfb4", fill_opacity=0.55,
                 tooltip=f"<b>Quadrant {q}</b><br>WBT {rows[q]['wbt']} °C<br>Air {rows[q]['temperature']} °C<br>Most common: {tree_info[q]['common']}",
             ).add_to(field_map)
         lon, lat = CENTERS[q]
