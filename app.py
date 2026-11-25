@@ -237,7 +237,7 @@ with chart_col:
     ))
     bar.update_layout(
         height=290, margin={"l": 5, "r": 5, "t": 15, "b": 5},
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="#ffffff",
         font={"color": "#000000"}, showlegend=False,
         yaxis={"title": "°C" if key != "humidity" else "%", "gridcolor": "#c9c0b6"},
         xaxis={"title": ""},
