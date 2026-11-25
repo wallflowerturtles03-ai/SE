@@ -124,8 +124,8 @@ h1, h2, h3, h4, h5, h6, p, label { color: var(--text) !important; }
     .kpi-value { font-size: 1.45rem; }
     .kpi-foot { font-size: .68rem; }
 }
-</style>
-""",[data-testid="stHeader"] {
+
+[data-testid="stHeader"] {
     background: transparent !important;
 }
 
@@ -136,7 +136,9 @@ h1, h2, h3, h4, h5, h6, p, label { color: var(--text) !important; }
 
 .block-container {
     padding-top: 3.2rem !important;
-}, unsafe_allow_html=True)
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.markdown('<div class="hero"><div class="eyebrow">Biodiversity & microclimate survey</div><h1>A closer look at the forest.</h1><p>Explore field observations across six survey quadrants at Karnala Wildlife Sanctuary.</p></div>', unsafe_allow_html=True)
 
