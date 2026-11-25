@@ -84,7 +84,7 @@ st.markdown("""
 <style>
     :root {
         --background: #FBF3E6 ;
-        --surface: #1f1f1f;
+        --surface: #FBF3E6;
         --surface-hover: #292929;
         --text: #000000;
         --muted: #b4b4b4;
