@@ -178,9 +178,25 @@ with map_col:
     st_folium(field_map, height=390, use_container_width=True, returned_objects=[])
     st.caption("The map combines Esri satellite imagery and KML-derived survey boundaries. Q1 is a marker because no Q1 polygon was supplied.")
 
+    st.markdown('<div class="panel-title">Microclimate by quadrant</div><div class="panel-sub">Compare readings across the survey area.</div>', unsafe_allow_html=True)
+    chart_metric = st.radio("Chart metric", ["WBT", "Air temperature", "Humidity"], horizontal=True, label_visibility="collapsed")
+    key = {"WBT": "wbt", "Air temperature": "temperature", "Humidity": "humidity"}[chart_metric]
+    bar = go.Figure(go.Bar(
+        x=[f"Q{q}" for q in rows], y=[rows[q][key] for q in rows],
+        marker_color=["#285b43" if q == selected_q else "#83a98a" for q in rows],
+        text=[f"{rows[q][key]:g}" for q in rows], textposition="outside",
+    ))
+    bar.update_layout(
+        height=280, margin={"l": 5, "r": 5, "t": 15, "b": 5},
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font={"color": "#000000"}, showlegend=False,
+        yaxis={"title": "°C" if key != "humidity" else "%", "gridcolor": "#c9c0b6"},
+        xaxis={"title": ""},
+    )
+    st.plotly_chart(bar, use_container_width=True, config={"displayModeBar": False})
+
 with detail_col:
-    options = list(range(1, 7))
-    selected_q = st.selectbox("Selected quadrant", options, format_func=lambda q: f"Quadrant {q}")
+    selected_q = st.selectbox("Selected quadrant", list(range(1, 7)), format_func=lambda q: f"Quadrant {q}")
     r, tree = rows[selected_q], tree_info[selected_q]
     st.markdown(f"### Quadrant {selected_q} · {r['wbt']:.1f} °C WBT")
     a, b = st.columns(2)
@@ -203,38 +219,17 @@ with detail_col:
         st.info("Source canopy readings include negative or unusually high values. The displayed mean excludes values outside 0–60 °C; ranges retain the reported values.")
     st.caption(f"Height from {tree['height_method']} measurements (n={tree['height_n']}). Q1–Q5 and Q6 use different measurement methods.")
 
-st.write("")
-chart_col, table_col = st.columns([1, 1.5], gap="medium")
-with chart_col:
-    st.markdown('<div class="panel-title">Microclimate by quadrant</div><div class="panel-sub">Compare readings across the survey area</div>', unsafe_allow_html=True)
-    chart_metric = st.radio("Chart metric", ["WBT", "Air temperature", "Humidity"], horizontal=True, label_visibility="collapsed")
-    key = {"WBT": "wbt", "Air temperature": "temperature", "Humidity": "humidity"}[chart_metric]
-    bar = go.Figure(go.Bar(
-        x=[f"Q{q}" for q in rows], y=[rows[q][key] for q in rows],
-        marker_color=["#285b43" if q == selected_q else "#83a98a" for q in rows],
-        text=[f"{rows[q][key]:g}" for q in rows], textposition="outside",
-    ))
-    bar.update_layout(
-        height=290, margin={"l": 5, "r": 5, "t": 15, "b": 5},
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="#ffffff",
-        font={"color": "#000000"}, showlegend=False,
-        yaxis={"title": "°C" if key != "humidity" else "%", "gridcolor": "#c9c0b6"},
-        xaxis={"title": ""},
-    )
-    st.plotly_chart(bar, use_container_width=True, config={"displayModeBar": False})
-
-with table_col:
-    st.markdown('<div class="panel-title">Quadrant comparison</div><div class="panel-sub">Summary of the field measurements</div>', unsafe_allow_html=True)
-    summary = []
-    for q in rows:
-        tree = tree_info[q]
-        summary.append({
-            "Quadrant": f"Q{q}", "WBT (°C)": rows[q]["wbt"],
-            "Air temp. (°C)": rows[q]["temperature"], "Humidity (%)": rows[q]["humidity"],
-            "Mean height (m)": round(tree["mean_height"], 1) if tree["mean_height"] is not None else None,
-            "Trees": tree["tree_count"], "Most common": tree["common"],
-        })
-    st.dataframe(pd.DataFrame(summary), use_container_width=True, hide_index=True)
+st.markdown('<div class="panel-title">Quadrant comparison</div><div class="panel-sub">Summary of the field measurements.</div>', unsafe_allow_html=True)
+summary = []
+for q in rows:
+    tree = tree_info[q]
+    summary.append({
+        "Quadrant": f"Q{q}", "WBT (°C)": rows[q]["wbt"],
+        "Air temp. (°C)": rows[q]["temperature"], "Humidity (%)": rows[q]["humidity"],
+        "Mean height (m)": round(tree["mean_height"], 1) if tree["mean_height"] is not None else None,
+        "Trees": tree["tree_count"], "Most common": tree["common"],
+    })
+st.dataframe(pd.DataFrame(summary), use_container_width=True, hide_index=True)
 
 st.download_button("Download quadrant summary CSV", pd.DataFrame(summary).to_csv(index=False), file_name="karnala-quadrant-summary.csv", mime="text/csv")
 st.caption("Field data supplied by Statistical Ecology Group 04. Thermal camera values should be reviewed against the original images before formal analysis.")
