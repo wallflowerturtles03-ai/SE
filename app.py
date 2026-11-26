@@ -7,7 +7,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 st.set_page_config(
-    page_title="Karnala Field Notes",
+    page_title="Karnala Bird Sanctuary",
     page_icon="🌿",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -159,7 +159,7 @@ body, p, label { font-family:"Times New Roman", Times, serif; }
 """, unsafe_allow_html=True)
 
 st.markdown(
-    '<div class="hero"><h1>Karnala field notes</h1>'
+    '<div class="hero"><h1>Karnala Bird Sanctuary</h1>'
     '<p>Biodiversity and microclimate observations across six survey quadrants.</p></div>',
     unsafe_allow_html=True,
 )
