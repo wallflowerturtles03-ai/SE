@@ -135,7 +135,7 @@ def wbt_color(value):
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-:root { --page:#f3f1e9; --card:#fffdf7; --ink:#26352c; --muted:#68756c; --line:#dedfd4; --forest:#285b43; --sage:#91b29a; }
+:root { --page:#F3EBD0; --card:#fffdf7; --ink:#26352c; --muted:#68756c; --line:#dedfd4; --forest:#285b43; --sage:#91b29a; }
 html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { background:var(--page) !important; color:var(--ink) !important; }
 .block-container { max-width:1440px; padding:2rem 2.2rem 2.5rem; }
 h1, h2, h3, h4, h5, h6 { color:var(--ink) !important; font-family:"Times New Roman", Times, serif !important; }
