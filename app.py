@@ -138,16 +138,16 @@ st.markdown("""
 :root { --page:#f3f1e9; --card:#fffdf7; --ink:#26352c; --muted:#68756c; --line:#dedfd4; --forest:#285b43; --sage:#91b29a; }
 html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { background:var(--page) !important; color:var(--ink) !important; }
 .block-container { max-width:1440px; padding:2rem 2.2rem 2.5rem; }
-h1, h2, h3, h4, h5, h6 { color:var(--ink) !important; font-family:Manrope,times new roman !important; }
-body, p, label { font-family:"DM Sans",times new roman; }
+h1, h2, h3, h4, h5, h6 { color:var(--ink) !important; font-family:"Times New Roman", Times, serif !important; }
+body, p, label { font-family:"Times New Roman", Times, serif; }
 .hero { margin:0 0 1.5rem; }
-.hero h1 { font:800 2.5rem Manrope,times new roman !important; letter-spacing:-.045em; margin:0 0 .35rem; }
+.hero h1 { font:800 2.5rem "Times New Roman", Times, serif !important; letter-spacing:-.045em; margin:0 0 .35rem; }
 .hero p { color:var(--muted) !important; margin:0; }
-.section-title { font:700 1.15rem Manrope,times new roman; color:var(--ink); margin:0 0 .2rem; }
+.section-title { font:700 1.15rem "Times New Roman", Times, serif; color:var(--ink); margin:0 0 .2rem; }
 .section-note { font-size:.88rem; color:var(--muted); margin:0 0 .9rem; }
 .kpi { height:118px; box-sizing:border-box; background:var(--card); border:1px solid var(--line); border-radius:15px; padding:16px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:5px; }
 .kpi-label { font-size:.82rem; color:var(--muted); }
-.kpi-value { font:800 1.65rem Manrope,times new roman; color:var(--forest); }
+.kpi-value { font:800 1.65rem "Times New Roman", Times, serif; color:var(--forest); }
 .kpi-foot { font-size:.74rem; color:var(--muted); }
 .species-tag { display:inline-block; background:#e7eee5; color:var(--forest); border-radius:999px; padding:4px 10px; margin:2px 4px 2px 0; font-size:.78rem; white-space:nowrap; }
 .closing { border-top:1px solid var(--line); margin-top:1.5rem; padding-top:1rem; color:var(--muted); font-size:.82rem; }
