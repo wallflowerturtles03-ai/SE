@@ -7,7 +7,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 st.set_page_config(
-    page_title="Karnala Field Notes",
+    page_title="Karnala Bird Santury",
     page_icon="🌿",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6, p, label { color: var(--text) !important; }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="hero"><div class="eyebrow">Biodiversity & microclimate survey</div><h1>A closer look at the forest.</h1><p>Explore field observations across six survey quadrants at Karnala Wildlife Sanctuary.</p></div>', unsafe_allow_html=True)
+st.markdown('<div class="hero"><div class="eyebrow">Biodiversity & microclimate survey</div><h1>Karnala Bird Sanctury.</h1><p>Explore field observations across six survey quadrants at Karnala Wildlife Sanctuary.</p></div>', unsafe_allow_html=True)
 
 all_wbt = [rows[q]["wbt"] for q in rows]
 c1, c2, c3, c4 = st.columns(4)
