@@ -113,7 +113,7 @@ for _, row in wbt_df.iterrows():
         "humidity": float(row["humidity"]),
     }
 
-# One shared cool-green to warm-amber ramp for WBT on the map, chart, and table.
+
 def mix_color(start, end, amount):
     return tuple(round(a + (b - a) * amount) for a, b in zip(start, end))
 
@@ -135,44 +135,26 @@ def wbt_color(value):
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-:root {
-    --page: #f3f1e9;
-    --card: #fffdf7;
-    --ink: #26352c;
-    --muted: #68756c;
-    --line: #dedfd4;
-    --forest: #285b43;
-    --sage: #91b29a;
-}
-html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-    background: var(--page) !important;
-    color: var(--ink) !important;
-}
-.block-container { max-width: 1440px; padding: 2rem 2.2rem 2.5rem; }
-h1, h2, h3, h4, h5, h6 { color: var(--ink) !important; font-family: Manrope, sans-serif !important; }
-body, p, label { font-family: "DM Sans", sans-serif; }
-.hero { margin: 0 0 1.5rem; }
-.hero h1 { font: 800 2.5rem Manrope, sans-serif !important; letter-spacing: -.045em; margin: 0 0 .35rem; }
-.hero p { color: var(--muted) !important; margin: 0; }
-.section-title { font: 700 1.15rem Manrope, sans-serif; color: var(--ink); margin: 0 0 .2rem; }
-.section-note { font-size: .88rem; color: var(--muted); margin: 0 0 .9rem; }
-.kpi {
-    height: 118px; box-sizing: border-box; background: var(--card); border: 1px solid var(--line);
-    border-radius: 15px; padding: 16px; display: flex; flex-direction: column;
-    justify-content: center; align-items: flex-start; gap: 5px;
-}
-.kpi-label { font-size: .82rem; color: var(--muted); }
-.kpi-value { font: 800 1.65rem Manrope, sans-serif; color: var(--forest); }
-.kpi-foot { font-size: .74rem; color: var(--muted); }
-.species-tag { display: inline-block; background: #e7eee5; color: var(--forest); border-radius: 999px; padding: 4px 10px; margin: 2px 4px 2px 0; font-size: .78rem; white-space: nowrap; }
-.closing { border-top: 1px solid var(--line); margin-top: 1.5rem; padding-top: 1rem; color: var(--muted); font-size: .82rem; }
-[data-testid="stMetric"] { background: var(--card); border: 1px solid var(--line); border-radius: 13px; padding: 12px 14px; }
-[data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color: var(--ink) !important; }
-[data-baseweb="select"] > div { background: var(--card); border-color: var(--line); }
-@media (max-width: 850px) {
-    .block-container { padding: 1.2rem 1rem 2rem; }
-    .hero h1 { font-size: 2rem !important; }
-}
+:root { --page:#f3f1e9; --card:#fffdf7; --ink:#26352c; --muted:#68756c; --line:#dedfd4; --forest:#285b43; --sage:#91b29a; }
+html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { background:var(--page) !important; color:var(--ink) !important; }
+.block-container { max-width:1440px; padding:2rem 2.2rem 2.5rem; }
+h1, h2, h3, h4, h5, h6 { color:var(--ink) !important; font-family:Manrope,sans-serif !important; }
+body, p, label { font-family:"DM Sans",sans-serif; }
+.hero { margin:0 0 1.5rem; }
+.hero h1 { font:800 2.5rem Manrope,sans-serif !important; letter-spacing:-.045em; margin:0 0 .35rem; }
+.hero p { color:var(--muted) !important; margin:0; }
+.section-title { font:700 1.15rem Manrope,sans-serif; color:var(--ink); margin:0 0 .2rem; }
+.section-note { font-size:.88rem; color:var(--muted); margin:0 0 .9rem; }
+.kpi { height:118px; box-sizing:border-box; background:var(--card); border:1px solid var(--line); border-radius:15px; padding:16px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:5px; }
+.kpi-label { font-size:.82rem; color:var(--muted); }
+.kpi-value { font:800 1.65rem Manrope,sans-serif; color:var(--forest); }
+.kpi-foot { font-size:.74rem; color:var(--muted); }
+.species-tag { display:inline-block; background:#e7eee5; color:var(--forest); border-radius:999px; padding:4px 10px; margin:2px 4px 2px 0; font-size:.78rem; white-space:nowrap; }
+.closing { border-top:1px solid var(--line); margin-top:1.5rem; padding-top:1rem; color:var(--muted); font-size:.82rem; }
+[data-testid="stMetric"] { background:var(--card); border:1px solid var(--line); border-radius:13px; padding:12px 14px; }
+[data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color:var(--ink) !important; }
+[data-baseweb="select"] > div { background:var(--card); border-color:var(--line); }
+@media (max-width:850px) { .block-container { padding:1.2rem 1rem 2rem; } .hero h1 { font-size:2rem !important; } }
 </style>
 """, unsafe_allow_html=True)
 
@@ -252,6 +234,42 @@ with map_column:
             st.session_state.last_map_click = signature
     st.caption("WBT colours share one cool-green to warm-amber scale across map, chart, and table. Q1 is a marker because no Q1 polygon was supplied.")
 
+    # The chart now fills the unused area directly under the map.
+    st.markdown('<div class="section-title">Microclimate by quadrant</div><div class="section-note">Select a bar to update the selected quadrant. Bars use a focused axis range for easier comparison.</div>', unsafe_allow_html=True)
+    chart_metric = st.radio("Chart metric", ["WBT", "Air temperature", "Humidity"], horizontal=True, label_visibility="collapsed")
+    metric_key = {"WBT": "wbt", "Air temperature": "temperature", "Humidity": "humidity"}[chart_metric]
+    units = "°C" if chart_metric != "Humidity" else "%"
+    chart_values = {q: rows[q][metric_key] for q in rows}
+    chart_min, chart_max = min(chart_values.values()), max(chart_values.values())
+    chart_span = chart_max - chart_min or 1
+    non_wbt_colors = ["#d9e3d8", "#a9c2aa", "#73977b", "#456f53", "#285b43"]
+    bar_colors = [
+        wbt_color(chart_values[q]) if chart_metric == "WBT"
+        else non_wbt_colors[min(4, int((chart_values[q] - chart_min) / chart_span * 5))]
+        for q in rows
+    ]
+    selected_q = st.session_state.selected_quadrant
+    bar_lines = ["#173c2a" if q == selected_q else "#fffdf7" for q in rows]
+    bar_widths = [3 if q == selected_q else 1 for q in rows]
+    chart = go.Figure(go.Bar(
+        x=[f"Q{q}" for q in rows],
+        y=[chart_values[q] - chart_min for q in rows],
+        base=[chart_min] * len(rows),
+        customdata=[[q, chart_values[q]] for q in rows],
+        marker={"color": bar_colors, "line": {"color": bar_lines, "width": bar_widths}},
+        text=[f"{chart_values[q]:g}" for q in rows],
+        textposition="outside",
+        hovertemplate=f"Quadrant %{{customdata[0]}}<br>{chart_metric}: %{{customdata[1]:.1f}} {units}<extra></extra>",
+    ))
+    chart.update_layout(
+        height=330, margin={"l": 15, "r": 15, "t": 25, "b": 10},
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", showlegend=False,
+        clickmode="event+select",
+        yaxis={"title": units, "range": [chart_min, chart_max + chart_span * 0.18], "gridcolor": "#e2e4da"},
+        xaxis={"title": None}, font={"color": "#26352c"},
+    )
+    st.plotly_chart(chart, use_container_width=True, config={"displayModeBar": False}, key="microclimate_chart", on_select=sync_from_chart, selection_mode="points")
+
 with detail_column:
     st.markdown('<div class="section-title">Selected quadrant</div><div class="section-note">Details and local-name records for the selected survey area.</div>', unsafe_allow_html=True)
     st.selectbox(
@@ -304,41 +322,7 @@ with detail_column:
     st.plotly_chart(comparison_chart, use_container_width=True, config={"displayModeBar": False})
     st.caption(f"Height from {tree['height_method']} measurements (n={tree['height_n']}); Q1–Q5 and Q6 use different measurement methods.")
 
-st.write("")
-st.markdown('<div class="section-title">Microclimate by quadrant</div><div class="section-note">Select a bar to update the selected quadrant. Bars use a focused axis range for easier comparison.</div>', unsafe_allow_html=True)
-chart_metric = st.radio("Chart metric", ["WBT", "Air temperature", "Humidity"], horizontal=True, label_visibility="collapsed")
-metric_key = {"WBT": "wbt", "Air temperature": "temperature", "Humidity": "humidity"}[chart_metric]
-units = "°C" if chart_metric != "Humidity" else "%"
-chart_values = {q: rows[q][metric_key] for q in rows}
-chart_min, chart_max = min(chart_values.values()), max(chart_values.values())
-chart_span = chart_max - chart_min or 1
-non_wbt_colors = ["#d9e3d8", "#a9c2aa", "#73977b", "#456f53", "#285b43"]
-bar_colors = [
-    wbt_color(chart_values[q]) if chart_metric == "WBT"
-    else non_wbt_colors[min(4, int((chart_values[q] - chart_min) / chart_span * 5))]
-    for q in rows
-]
-bar_lines = ["#173c2a" if q == selected_q else "#fffdf7" for q in rows]
-bar_widths = [3 if q == selected_q else 1 for q in rows]
-chart = go.Figure(go.Bar(
-    x=[f"Q{q}" for q in rows],
-    y=[chart_values[q] - chart_min for q in rows],
-    base=[chart_min] * len(rows),
-    customdata=[[q, chart_values[q]] for q in rows],
-    marker={"color": bar_colors, "line": {"color": bar_lines, "width": bar_widths}},
-    text=[f"{chart_values[q]:g}" for q in rows],
-    textposition="outside",
-    hovertemplate=f"Quadrant %{{customdata[0]}}<br>{chart_metric}: %{{customdata[1]:.1f}} {units}<extra></extra>",
-))
-chart.update_layout(
-    height=330, margin={"l": 15, "r": 15, "t": 25, "b": 10},
-    paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", showlegend=False,
-    clickmode="event+select",
-    yaxis={"title": units, "range": [chart_min, chart_max + chart_span * 0.18], "gridcolor": "#e2e4da"},
-    xaxis={"title": None}, font={"color": "#26352c"},
-)
-st.plotly_chart(chart, use_container_width=True, config={"displayModeBar": False}, key="microclimate_chart", on_select=sync_from_chart, selection_mode="points")
-
+# The comparison table now occupies the former full-width chart section.
 st.write("")
 st.markdown('<div class="section-title">Quadrant comparison</div><div class="section-note">Select a row to update the map and selected-quadrant details.</div>', unsafe_allow_html=True)
 summary = []
