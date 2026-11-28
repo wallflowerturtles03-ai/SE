@@ -149,7 +149,7 @@ body, p, label { font-family:"Times New Roman", Times, serif; }
 .kpi-label { font-size:.82rem; color:var(--muted); }
 .kpi-value { font:800 1.65rem "Times New Roman", Times, serif; color:var(--forest); }
 .kpi-foot { font-size:.74rem; color:var(--muted); }
-.species-tag { display:inline-block; background:#e7eee5; color:var(--forest); border-radius:999px; padding:4px 10px; margin:2px 4px 2px 0; font-size:.78rem; white-space:nowrap; }
+.species-tag { display:inline-block; background:#e7eee5; color:var(--forest); border-radius:6px; padding:4px 10px; margin:2px 4px 2px 0; font-size:.78rem; white-space:nowrap; }
 .closing { border-top:1px solid var(--line); margin-top:1.5rem; padding-top:1rem; color:var(--muted); font-size:.82rem; }
 [data-testid="stMetric"] { background:var(--card); border:1px solid var(--line); border-radius:13px; padding:12px 14px; }
 [data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color:var(--ink) !important; }
