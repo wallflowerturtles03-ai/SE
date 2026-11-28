@@ -293,8 +293,8 @@ with detail_column:
     ground_mean = sum(ground_values) / len(ground_values)
     canopy_mean = sum(canopy_values) / len(canopy_values)
     thermal_chart = go.Figure()
-    thermal_chart.add_trace(go.Bar(x=[ground_mean], y=["Ground"], orientation="h", marker_color="#91b29a", text=[f"{ground_mean:.1f} °C"], textposition="inside", name="Ground", hovertemplate="Ground mean: %{x:.1f} °C<extra></extra>"))
-    thermal_chart.add_trace(go.Bar(x=[canopy_mean], y=["Canopy"], orientation="h", marker_color="#d49a58", text=[f"{canopy_mean:.1f} °C"], textposition="inside", name="Canopy", hovertemplate="Canopy mean: %{x:.1f} °C<extra></extra>"))
+    thermal_chart.add_trace(go.Bar(x=[ground_mean], y=["Ground"], orientation="h", marker_color="#91b29a", text=[f"{ground_mean:.1f} °C"], textposition="outside", name="Ground", hovertemplate="Ground mean: %{x:.1f} °C<extra></extra>"))
+    thermal_chart.add_trace(go.Bar(x=[canopy_mean], y=["Canopy"], orientation="h", marker_color="#d49a58", text=[f"{canopy_mean:.1f} °C"], textposition="outside", name="Canopy", hovertemplate="Canopy mean: %{x:.1f} °C<extra></extra>"))
     thermal_chart.update_layout(barmode="group", height=125, margin={"l": 8, "r": 8, "t": 5, "b": 5}, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", showlegend=False, xaxis={"title": None, "visible": False, "range": [0, 45]}, yaxis={"title": None}, font={"color": "#26352c"})
     st.plotly_chart(thermal_chart, use_container_width=True, config={"displayModeBar": False})
     if any(value < 0 or value > 60 for value in THERMAL[selected_q]["canopy"]):
